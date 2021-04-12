@@ -14,103 +14,110 @@ class _HomepageState extends State<Homepage> {
         body: Stack(
           children: [
             ListView(),
-            Container(
-              color: Colors.transparent,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                    Icon(
-                      Icons.search,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-                bottom: 0,
-                left: 5,
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.menu,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        showModalBottomSheet<void>(
-                          context: context,
-                          isScrollControlled: true,
-                          builder: (BuildContext context) {
-                            return Wrap(
-                              children: [
-                                Container(
-                                  color: Colors.black,
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        Row(
-                                          children: [
-                                            IconButton(
-                                                icon: Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
-                                                ),
-                                                onPressed: (){
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => Homepage()),
-                                                  );
-                                                }),
-                                          ],
-                                        ),
-                                        Divider(color: Colors.grey),
-                                        buildFlatButton(context, "Nature"),
-                                        Divider(color: Colors.grey),
-                                        buildFlatButton(context, 'LandScape'),
-                                        Divider(color: Colors.grey),
-                                        buildFlatButton(context, 'Love'),
-                                        Divider(color: Colors.grey),
-                                        buildFlatButton(context, 'Food'),
-                                        Divider(color: Colors.grey),
-                                        buildFlatButton(context, 'Music'),
-                                        Divider(color: Colors.grey),
-                                        buildFlatButton(context, 'Animal'),
-                                        Divider(color: Colors.grey),
-                                        buildFlatButton(context, 'Rain'),
-                                        Divider(color: Colors.grey),
-                                        buildFlatButton(context, 'Happy'),
-                                        Divider(color: Colors.grey),
-
-
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    )
-                  ],
-                ))
+            buildTopBar(),
+            buildMenu(context)
           ],
         ),
       ),
     );
+  }
+
+  Positioned buildMenu(BuildContext context) {
+    return Positioned(
+              bottom: 0,
+              left: 5,
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (BuildContext context) {
+                          return Wrap(
+                            children: [
+                              Container(
+                                color: Colors.black,
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                              icon: Icon(
+                                                Icons.close,
+                                                color: Colors.white,
+                                              ),
+                                              onPressed: (){
+                                                Navigator.pop(
+                                                  context,
+                                                );
+                                              }),
+                                        ],
+                                      ),
+                                      Divider(color: Colors.grey),
+                                      buildFlatButton(context, "Nature"),
+                                      Divider(color: Colors.grey),
+                                      buildFlatButton(context, 'LandScape'),
+                                      Divider(color: Colors.grey),
+                                      buildFlatButton(context, 'Love'),
+                                      Divider(color: Colors.grey),
+                                      buildFlatButton(context, 'Food'),
+                                      Divider(color: Colors.grey),
+                                      buildFlatButton(context, 'Music'),
+                                      Divider(color: Colors.grey),
+                                      buildFlatButton(context, 'Animal'),
+                                      Divider(color: Colors.grey),
+                                      buildFlatButton(context, 'Rain'),
+                                      Divider(color: Colors.grey),
+                                      buildFlatButton(context, 'Happy'),
+                                      Divider(color: Colors.grey),
+
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  )
+                ],
+              ));
+  }
+
+  Container buildTopBar() {
+    return Container(
+            color: Colors.transparent,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.home,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  Icon(
+                    Icons.search,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ],
+              ),
+            ),
+          );
   }
 
   FlatButton buildFlatButton(BuildContext context, wallType) {
