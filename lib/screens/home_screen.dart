@@ -126,7 +126,7 @@ class _HomepageState extends State<Homepage> {
         ));
   }
 
-   buildTopBar() {
+  buildTopBar() {
     return Container(
       height: 50,
       color: Colors.black.withOpacity(.5),
@@ -170,9 +170,12 @@ class _HomepageState extends State<Homepage> {
                     showSearch = true;
                   });
                 } else {
-                  if(venali.text.isNotEmpty){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SearchResultScreen(venali.text)));
+                  if (venali.text.isNotEmpty) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                SearchResultScreen(venali.text)));
                   }
                 }
               },
@@ -194,7 +197,13 @@ class _HomepageState extends State<Homepage> {
         wallType,
         style: TextStyle(color: Colors.white),
       ),
-      onPressed: () => Navigator.pop(context),
+      onPressed: () {
+        Navigator.pop(context);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SearchResultScreen(wallType)));
+      },
     );
   }
 }
