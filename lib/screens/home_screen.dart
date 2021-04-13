@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallpapernxt_app/models/models.dart';
+import 'package:wallpapernxt_app/screens/search_result_screen.dart';
 import 'package:wallpapernxt_app/service/service.dart';
 
 class Homepage extends StatefulWidget {
@@ -125,7 +126,7 @@ class _HomepageState extends State<Homepage> {
         ));
   }
 
-  Container buildTopBar() {
+   buildTopBar() {
     return Container(
       height: 50,
       color: Colors.black.withOpacity(.5),
@@ -149,6 +150,7 @@ class _HomepageState extends State<Homepage> {
                       right: 8,
                     ),
                     child: TextField(
+                        textAlign: TextAlign.center,
                         controller: venali,
                         maxLines: 1,
                         maxLength: 20,
@@ -163,14 +165,16 @@ class _HomepageState extends State<Homepage> {
                 : Container(),
             IconButton(
               onPressed: () {
-                if(!showSearch){
+                if (!showSearch) {
                   setState(() {
                     showSearch = true;
                   });
-                }else{
-                  print(venali.text);
+                } else {
+                  if(venali.text.isNotEmpty){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SearchResultScreen(venali.text)));
+                  }
                 }
-
               },
               icon: Icon(
                 Icons.search,
