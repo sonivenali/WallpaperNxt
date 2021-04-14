@@ -37,7 +37,7 @@ class _HomepageState extends State<Homepage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => ImageScreen(
-                                              snapshot.data[index].urls.full)));
+                                              snapshot.data[index].urls.small)));
                                 },
                                 child: Image.network(
                                   snapshot.data[index].urls.small,

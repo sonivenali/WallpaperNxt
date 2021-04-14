@@ -41,5 +41,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+    <string>For downloading image</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>For downloading image</string>
 </dict>
 </plist>
