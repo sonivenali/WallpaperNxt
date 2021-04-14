@@ -3,6 +3,8 @@ import 'package:wallpapernxt_app/models/models.dart';
 import 'package:wallpapernxt_app/screens/search_result_screen.dart';
 import 'package:wallpapernxt_app/service/service.dart';
 
+import 'image_screen.dart';
+
 class Homepage extends StatefulWidget {
   @override
   _HomepageState createState() => _HomepageState();
@@ -29,11 +31,20 @@ class _HomepageState extends State<Homepage> {
                         itemBuilder: (context, index) {
                           return Stack(
                             children: [
-                              Image.network(
-                                snapshot.data[index].urls.small,
-                                height: 200,
-                                width: MediaQuery.of(context).size.width,
-                                fit: BoxFit.fitWidth,
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ImageScreen(
+                                              snapshot.data[index].urls.full)));
+                                },
+                                child: Image.network(
+                                  snapshot.data[index].urls.small,
+                                  height: 200,
+                                  width: MediaQuery.of(context).size.width,
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
                             ],
                           );
@@ -136,10 +147,15 @@ class _HomepageState extends State<Homepage> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(
-              Icons.home,
-              color: Colors.white,
-              size: 30,
+            IconButton(
+              onPressed: () {
+                setState(() {});
+              },
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
+                size: 30,
+              ),
             ),
             showSearch
                 ? Expanded(

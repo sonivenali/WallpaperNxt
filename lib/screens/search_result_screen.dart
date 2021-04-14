@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallpapernxt_app/models/models.dart';
+import 'package:wallpapernxt_app/screens/image_screen.dart';
 import 'package:wallpapernxt_app/service/service.dart';
 
 class SearchResultScreen extends StatefulWidget {
@@ -29,11 +30,19 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         itemBuilder: (context, index) {
                           return Stack(
                             children: [
-                              Image.network(
-                                snapshot.data[index].urls.small,
-                                height: 200,
-                                width: MediaQuery.of(context).size.width,
-                                fit: BoxFit.fitWidth,
+                              GestureDetector(onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ImageScreen(snapshot.data[index].urls.full)));
+                              },
+                                child: Image.network(
+                                  snapshot.data[index].urls.small,
+                                  height: 200,
+                                  width: MediaQuery.of(context).size.width,
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
                             ],
                           );
@@ -55,11 +64,12 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 8),
-                    child: IconButton(onPressed: () {
-                      Navigator.pop(
-                        context,
-                      );
-                    },
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(
+                          context,
+                        );
+                      },
                       icon: Icon(
                         Icons.arrow_back,
                         color: Colors.white,
