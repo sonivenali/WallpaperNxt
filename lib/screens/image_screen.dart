@@ -32,36 +32,24 @@ class _ImageScreenState extends State<ImageScreen> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: Padding(
-                padding: const EdgeInsets.only(left: 40, right: 40),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        icon: Icon(
-                          Icons.download_rounded,
-                          color: Colors.white,
-                        ),
-                        onPressed: () async {
-                          try {
-                            // Saved with this method.
-                            var imageId = await ImageDownloader.downloadImage(
-                                widget.imageLink);
-                            if (imageId == null) {
-                              return;
-                            }
-                          } on PlatformException catch (error) {
-                            print(error);
-                          }
-                        }),
-                    IconButton(
-                        icon: Icon(
-                          Icons.image,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {}),
-                  ],
-                ),
+                padding: const EdgeInsets.only(left: 40, right: 40,bottom: 40),
+                child: IconButton(
+                    icon: Icon(
+                      Icons.download_rounded,
+                      color: Colors.white,
+                    ),
+                    onPressed: () async {
+                      try {
+                        // Saved with this method.
+                        var imageId = await ImageDownloader.downloadImage(
+                            widget.imageLink);
+                        if (imageId == null) {
+                          return;
+                        }
+                      } on PlatformException catch (error) {
+                        print(error);
+                      }
+                    }),
               ),
             ),
           )

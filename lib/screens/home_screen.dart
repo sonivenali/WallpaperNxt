@@ -30,6 +30,7 @@ class _HomepageState extends State<Homepage> {
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
                           return Stack(
+                            alignment: Alignment.center,
                             children: [
                               GestureDetector(
                                 onTap: () {
@@ -37,7 +38,8 @@ class _HomepageState extends State<Homepage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => ImageScreen(
-                                              snapshot.data[index].urls.small)));
+                                              snapshot
+                                                  .data[index].urls.small)));
                                 },
                                 child: Image.network(
                                   snapshot.data[index].urls.small,
@@ -46,6 +48,45 @@ class _HomepageState extends State<Homepage> {
                                   fit: BoxFit.fitWidth,
                                 ),
                               ),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 200,
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                              Positioned(
+                                bottom: 3,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 28),
+                                      child: Text(
+                                        snapshot.data[index].user.username
+                                            .toUpperCase(),
+                                        style: TextStyle(
+                                            color: Colors.white.withOpacity(1),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    Text(
+                                      snapshot.data[index].user.totalLikes
+                                          .toString(),
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 8, top: 6),
+                                      child: Icon(Icons.favorite,
+                                          size: 30, color: Colors.white60),
+                                    ),
+                                  ],
+                                ),
+                              )
                             ],
                           );
                         });
