@@ -1,21 +1,33 @@
 PODS:
   - Flutter (1.0.0)
-  - image_downloader (0.0.1):
+  - image_gallery_saver (1.5.0):
+    - Flutter
+  - path_provider (0.0.1):
+    - Flutter
+  - simple_permissions (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - image_downloader (from `.symlinks/plugins/image_downloader/ios`)
+  - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - simple_permissions (from `.symlinks/plugins/simple_permissions/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  image_downloader:
-    :path: ".symlinks/plugins/image_downloader/ios"
+  image_gallery_saver:
+    :path: ".symlinks/plugins/image_gallery_saver/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  simple_permissions:
+    :path: ".symlinks/plugins/simple_permissions/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  image_downloader: 73e190d6c9f286f2649554051348d9cb319cd4b3
+  image_gallery_saver: 259eab68fb271cfd57d599904f7acdc7832e7ef2
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  simple_permissions: 9400071431223c8be32968d6d51174ee3940b050
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 

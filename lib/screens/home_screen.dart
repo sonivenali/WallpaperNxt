@@ -14,6 +14,13 @@ class _HomepageState extends State<Homepage> {
   final service = WallpaperService();
   bool showSearch = false;
   final venali = TextEditingController();
+  FocusNode searchFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    searchFocusNode = FocusNode();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,65 +36,65 @@ class _HomepageState extends State<Homepage> {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
-                          return Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ImageScreen(
-                                              snapshot
-                                                  .data[index].urls.small)));
-                                },
-                                child: Image.network(
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ImageScreen(
+                                          snapshot.data[index].urls.full)));
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Image.network(
                                   snapshot.data[index].urls.small,
                                   height: 200,
                                   width: MediaQuery.of(context).size.width,
                                   fit: BoxFit.fitWidth,
                                 ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 200,
-                                color: Colors.black.withOpacity(0.5),
-                              ),
-                              Positioned(
-                                bottom: 3,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 28),
-                                      child: Text(
-                                        snapshot.data[index].user.username
-                                            .toUpperCase(),
-                                        style: TextStyle(
-                                            color: Colors.white.withOpacity(1),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Text(
-                                      snapshot.data[index].user.totalLikes
-                                          .toString(),
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: 8, top: 6),
-                                      child: Icon(Icons.favorite,
-                                          size: 30, color: Colors.white60),
-                                    ),
-                                  ],
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 200,
+                                  color: Colors.black.withOpacity(0.5),
                                 ),
-                              )
-                            ],
+                                Positioned(
+                                  bottom: 3,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 28),
+                                        child: Text(
+                                          snapshot.data[index].user.username
+                                              .toUpperCase(),
+                                          style: TextStyle(
+                                              color:
+                                                  Colors.white.withOpacity(1),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                      Text(
+                                        snapshot.data[index].user.totalLikes
+                                            .toString(),
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 8, top: 6),
+                                        child: Icon(Icons.favorite,
+                                            size: 30, color: Colors.white60),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           );
                         });
                   } else if (snapshot.hasError) {
@@ -188,16 +195,6 @@ class _HomepageState extends State<Homepage> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () {
-                setState(() {});
-              },
-              icon: Icon(
-                Icons.home,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
             showSearch
                 ? Expanded(
                     child: Padding(
@@ -211,9 +208,13 @@ class _HomepageState extends State<Homepage> {
                         controller: venali,
                         maxLines: 1,
                         maxLength: 20,
+                        focusNode: searchFocusNode,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           counterText: "",
+                          hintText: "Search here..",
+                          hintStyle:
+                              TextStyle(color: Colors.white.withOpacity(0.7)),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide.none,
                           ),
@@ -226,6 +227,7 @@ class _HomepageState extends State<Homepage> {
                   setState(() {
                     showSearch = true;
                   });
+                  searchFocusNode.requestFocus();
                 } else {
                   if (venali.text.isNotEmpty) {
                     Navigator.push(
@@ -262,5 +264,11 @@ class _HomepageState extends State<Homepage> {
                 builder: (context) => SearchResultScreen(wallType)));
       },
     );
+  }
+
+  @override
+  void dispose() {
+    searchFocusNode.dispose();
+    super.dispose();
   }
 }
